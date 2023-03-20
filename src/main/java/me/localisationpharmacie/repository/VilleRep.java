@@ -1,10 +1,10 @@
-package me.localisationpharmacies.repository;
+package me.localisationpharmacie.repository;
 
-import me.localisationpharmacies.entity.Ville;
+
+import me.localisationpharmacie.entity.Ville;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface VilleRep extends JpaRepository<Ville , Integer> {
 
+public interface VilleRep extends JpaRepository<Ville, Integer> {
     Ville findById(int id);
-
 }

@@ -1,34 +1,39 @@
-package me.localisationpharmacies.controller;
+package me.localisationpharmacie.controller;
 
-import me.localisationpharmacies.entity.Ville;
-import me.localisationpharmacies.repository.VilleRep;
+
+import me.localisationpharmacie.entity.Ville;
+import me.localisationpharmacie.service.VilleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("ville")
+@RequestMapping("api/villes")
 @CrossOrigin
 public class VilleController {
 
     @Autowired
-    private VilleRep villeRep;
+    private VilleService villeService;
+
+    @GetMapping("/")
+    public List<Ville> findAll(){
+        return villeService.findAll();
+    }
 
     @PostMapping("/save")
     public void save(@RequestBody Ville ville){
-        villeRep.save(ville);
+        villeService.save(ville);
     }
 
-    @GetMapping("/all")
-    public List<Ville> findAll(){
-        return villeRep.findAll();
+    @PutMapping("/update")
+    public void update(@RequestBody Ville v){
+        villeService.update(v);
     }
-
     @DeleteMapping("/delete/{id}")
-    public void delete(@PathVariable String id){
-        Ville v=villeRep.findById(Integer.parseInt(id));
-        villeRep.delete(v);
+    public void delete(@PathVariable int id){
+        Ville v=villeService.findById(id);
+        villeService.delete(v);
     }
 
 

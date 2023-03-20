@@ -1,10 +1,10 @@
-package me.localisationpharmacies.repository;
+package me.localisationpharmacie.repository;
 
 
-import me.localisationpharmacies.entity.Garde;
+import me.localisationpharmacie.entity.Garde;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface GardeRep extends JpaRepository<Garde , Integer> {
+public interface GardeRep extends JpaRepository<Garde, Integer> {
 
     Garde findById(int id);
 }

@@ -8,6 +8,7 @@ public class LocalisationPharmacieApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(LocalisationPharmacieApplication.class, args);
+        System.out.println("Done");
     }
 
 }

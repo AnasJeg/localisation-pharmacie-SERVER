@@ -1,34 +1,40 @@
-package me.localisationpharmacies.controller;
+package me.localisationpharmacie.controller;
 
-import me.localisationpharmacies.entity.Garde;
-import me.localisationpharmacies.repository.GardeRep;
+
+import me.localisationpharmacie.entity.Garde;
+import me.localisationpharmacie.service.GardeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("garde")
+@RequestMapping("api/gardes")
 @CrossOrigin
 public class GardeController {
 
     @Autowired
-    private GardeRep gardeRep;
+    private GardeService gardeService;
+
+    @GetMapping("/")
+    public List<Garde> findAll(){
+        return gardeService.findAll();
+    }
 
     @PostMapping("/save")
     public void save(@RequestBody Garde garde){
-        gardeRep.save(garde);
+        gardeService.save(garde);
     }
 
-    @GetMapping("/all")
-    public List<Garde> findAll(){
-        return gardeRep.findAll();
-    }
 
     @DeleteMapping("/delete/{id}")
-    public void delete(@PathVariable String id){
-        Garde g=gardeRep.findById(Integer.parseInt(id));
-        gardeRep.delete(g);
+    public void delete(@PathVariable int id){
+        Garde g=gardeService.findById(id);
+        gardeService.delete(g);
     }
 
+    @PutMapping("/update")
+    public void update(@RequestBody Garde g){
+        gardeService.update(g);
+    }
 }

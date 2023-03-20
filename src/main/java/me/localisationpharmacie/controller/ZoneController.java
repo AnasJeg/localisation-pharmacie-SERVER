@@ -1,35 +1,48 @@
-package me.localisationpharmacies.controller;
+package me.localisationpharmacie.controller;
 
-import me.localisationpharmacies.entity.Zone;
-import me.localisationpharmacies.repository.ZoneRep;
+
+import me.localisationpharmacie.entity.Zone;
+import me.localisationpharmacie.service.ZoneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("zone")
+@RequestMapping("api/zones")
 @CrossOrigin
 public class ZoneController {
 
     @Autowired
-    private ZoneRep zoneRep;
+    private ZoneService zoneService;
+
+    @GetMapping("/")
+    public List<Zone> findAll(){
+        return  zoneService.findAll();
+    }
 
     @PostMapping("/save")
     public void save(@RequestBody Zone zone){
-        zoneRep.save(zone);
+        zoneService.save(zone);
     }
 
-    @GetMapping("/all")
-    public List<Zone> findAll(){
-      return  zoneRep.findAll();
-    }
 
     @DeleteMapping("/delete/{id}")
-    public void delete(@PathVariable String id){
-        Zone z=zoneRep.findById(Integer.parseInt(id));
-        zoneRep.delete(z);
+    public void delete(@PathVariable int id){
+        Zone z=zoneService.findById(id);
+        zoneService.delete(z);
     }
+
+    @PutMapping("/update")
+    public void update(@RequestBody Zone z){
+        zoneService.update(z);
+    }
+
+    @GetMapping("/ville/{nom}")
+    public List<Zone> getAllZone(@PathVariable String nom){
+        return zoneService.findAllByVille(nom);
+    }
+
 
 
 }
