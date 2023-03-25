@@ -27,5 +27,6 @@ public class Garde_Pharmacie {
 
     @ManyToOne
     @JoinColumn(name = "garde", insertable = false, updatable = false)
+    @JsonIgnore
     private Garde garde;
 }

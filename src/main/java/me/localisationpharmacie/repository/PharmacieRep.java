@@ -17,5 +17,4 @@ public interface PharmacieRep extends JpaRepository<Pharmacie, Integer> {
         @Query("SELECT p FROM Pharmacie p JOIN p.zone z JOIN z.ville v JOIN p.pharmacieGardes pg WHERE v.nom = :ville AND z.nom = :zone AND pg.garde.type = :period ")
         List<Pharmacie> findAllPh(@Param("ville") String ville, @Param("zone") String zone, @Param("period") String period);
 
-
 }

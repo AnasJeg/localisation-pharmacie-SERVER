@@ -6,8 +6,10 @@ import me.localisationpharmacie.entity.Pharmacie;
 import me.localisationpharmacie.repository.Garde_PharmacieRep;
 import me.localisationpharmacie.service.PharmacieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -56,5 +58,13 @@ public class PharmacieController {
         return pharmacieService.findById(Integer.parseInt(id));
       }
 
+    @GetMapping("/{id}/itineraire")
+   public String getItinerary(@PathVariable int id, @RequestParam String depart) {
+        try {
+            return  pharmacieService.getItineraire(id,depart);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
+    }
 }
