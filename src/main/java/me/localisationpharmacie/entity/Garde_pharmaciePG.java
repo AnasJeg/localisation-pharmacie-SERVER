@@ -1,8 +1,6 @@
 package me.localisationpharmacie.entity;
 
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,7 +13,6 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 public class Garde_pharmaciePG implements Serializable {
-
     private int pharmacie;
     private int garde;
     @Temporal(TemporalType.DATE)

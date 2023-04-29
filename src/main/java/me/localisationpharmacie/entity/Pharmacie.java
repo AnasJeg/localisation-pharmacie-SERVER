@@ -1,6 +1,7 @@
 package me.localisationpharmacie.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +21,7 @@ public class Pharmacie {
     private String adresse;
     private double latitude;
     private double longitude;
-    @Column(nullable = true, length = 64)
+
     private String photos;
 
     @ManyToOne(fetch = FetchType.EAGER)

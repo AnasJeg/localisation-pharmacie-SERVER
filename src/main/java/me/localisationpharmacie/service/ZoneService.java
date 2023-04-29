@@ -38,6 +38,12 @@ public class ZoneService implements Dao<Zone> {
         zoneRep.save(c);
     }
 
+    public Zone updateZone(int id ,Zone zoneDetails) {
+        Zone zone = zoneRep.findById(id);
+        zone.setNom(zoneDetails.getNom());
+        zone.setVille(zoneDetails.getVille());
+        return zoneRep.save(zone);
+    }
     public List<Zone> findAllByVille(String nom){
 
         return zoneRep.findZoneByVille(nom);

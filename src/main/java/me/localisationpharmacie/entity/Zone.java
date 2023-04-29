@@ -22,6 +22,6 @@ public class Zone {
     @JsonIgnore
     private Collection<Pharmacie> pharmacie;
 
-    @ManyToOne(fetch = FetchType.EAGER) @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
     private Ville ville;
 }

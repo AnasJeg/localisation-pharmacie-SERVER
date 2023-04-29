@@ -7,11 +7,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public interface Garde_PharmacieRep extends JpaRepository<Garde_Pharmacie, Integer> {
     Garde_Pharmacie findById(int id);
-
     @Query("select gp from Garde_Pharmacie gp where CURRENT_DATE NOT BETWEEN gp.pg.dateDebut and gp.dateFin")
     List<Garde_Pharmacie> findAllPharmaciesDisponible();
 

@@ -1,6 +1,7 @@
 package me.localisationpharmacie.controller;
 
 
+import me.localisationpharmacie.entity.Ville;
 import me.localisationpharmacie.entity.Zone;
 import me.localisationpharmacie.service.ZoneService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,11 @@ public class ZoneController {
         Zone z=zoneService.findById(id);
         zoneService.delete(z);
     }
+
+    @PutMapping("/update/{id}")
+    public Zone updateCity(@PathVariable int id, @RequestBody Zone zone) {
+        return  zoneService.updateZone(id,zone);
+        }
 
     @PutMapping("/update")
     public void update(@RequestBody Zone z){

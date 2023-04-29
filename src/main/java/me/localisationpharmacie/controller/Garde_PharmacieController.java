@@ -1,10 +1,17 @@
 package me.localisationpharmacie.controller;
 
 import me.localisationpharmacie.entity.Garde_Pharmacie;
+import me.localisationpharmacie.entity.Garde_pharmaciePG;
+import me.localisationpharmacie.entity.Zone;
 import me.localisationpharmacie.service.Garde_PharmacieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -35,6 +42,23 @@ public class Garde_PharmacieController {
         gardePharmacieService.update(p);
     }
 
+    @PutMapping("/update/{dateD}")
+    public void updateCity(@PathVariable("dateD") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateD, @RequestBody Garde_Pharmacie gp) {
+            gardePharmacieService.updateGarde_Pharmacie(dateD, gp);
+    }
+   /*
+    @PutMapping("/update/{dateDebut}")
+    public void  updateGarde_Pharmacie(@PathVariable("dateDebut") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateDebut,
+                                                                 @RequestBody Garde_pharmaciePG pgToUpdate) {
+        Garde_Pharmacie existingGarde_Pharmacie = gardePharmacieService.findByPg_DateDebut(dateDebut);
 
+        if (existingGarde_Pharmacie != null) {
+            existingGarde_Pharmacie.setPg(pgToUpdate);
+           gardePharmacieService.save(existingGarde_Pharmacie);
+        } else {
+            System.out.println("not found");
+        }
+    }
+*/
 
 }

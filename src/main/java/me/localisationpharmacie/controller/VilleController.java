@@ -26,6 +26,19 @@ public class VilleController {
         villeService.save(ville);
     }
 
+    @PutMapping("/update/{id}")
+    public Ville updateCity(@PathVariable int id, @RequestBody Ville Ville) {
+        Ville existingCity = villeService.findById(id);
+        if (existingCity != null) {
+            existingCity.setNom(Ville.getNom());
+            villeService.update(existingCity);
+        }
+        return null;
+    }
+    @GetMapping("/{id}")
+    public Ville findById(@PathVariable int id) {
+        return villeService.findById(id);
+    }
     @PutMapping("/update")
     public void update(@RequestBody Ville v){
         villeService.update(v);
