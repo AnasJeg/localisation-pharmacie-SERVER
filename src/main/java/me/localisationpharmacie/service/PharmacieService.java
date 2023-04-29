@@ -51,7 +51,7 @@ public class PharmacieService implements Dao<Pharmacie> {
 
 
     public String getItineraire(int id, String depart) throws Exception {
-        String apikey="";
+        String apikey="AIzaSyDzmu1dHaje4yWHlQkP4cGC6lwWBRuwaUA";
         Optional<Pharmacie> optionalPharmacie = Optional.ofNullable(pharmacieRep.findById(id));
         Pharmacie pharmacie = optionalPharmacie.orElseThrow(() -> new Exception("Pharmacie not found !!!"));
         String destination = pharmacie.getLatitude() + "," + pharmacie.getLongitude();

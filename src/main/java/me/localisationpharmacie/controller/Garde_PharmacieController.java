@@ -42,9 +42,11 @@ public class Garde_PharmacieController {
         gardePharmacieService.update(p);
     }
 
-    @PutMapping("/update/{dateD}")
-    public void updateCity(@PathVariable("dateD") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateD, @RequestBody Garde_Pharmacie gp) {
-            gardePharmacieService.updateGarde_Pharmacie(dateD, gp);
+    @PutMapping("/update/{dateD}/{idF}/{idG}")
+    public void updateCity(@PathVariable("dateD") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateD,
+                           @PathVariable("idF") int idF,@PathVariable("idG") int idG,
+                           @RequestBody Garde_Pharmacie gp) {
+            gardePharmacieService.updateGarde_Pharmacie(dateD, idF ,idG, gp);
     }
    /*
     @PutMapping("/update/{dateDebut}")
