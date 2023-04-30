@@ -1,10 +1,13 @@
 package me.localisationpharmacie.service;
 
 import me.localisationpharmacie.DAO.Dao;
+import me.localisationpharmacie.entity.Garde;
 import me.localisationpharmacie.entity.Garde_Pharmacie;
 import me.localisationpharmacie.entity.Garde_pharmaciePG;
 import me.localisationpharmacie.entity.Pharmacie;
+import me.localisationpharmacie.repository.GardeRep;
 import me.localisationpharmacie.repository.Garde_PharmacieRep;
+import me.localisationpharmacie.repository.PharmacieRep;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +19,10 @@ public class Garde_PharmacieService implements Dao<Garde_Pharmacie> {
 
     @Autowired
     private Garde_PharmacieRep garde_pharmacieRep;
-
-    private Garde_pharmaciePG gardePharmaciePG;
+    @Autowired
+    private PharmacieRep pharmacieRep;
+    @Autowired
+    private GardeRep gardeRep;
 
     @Override
     public Garde_Pharmacie save(Garde_Pharmacie c) {
@@ -44,24 +49,37 @@ public class Garde_PharmacieService implements Dao<Garde_Pharmacie> {
         garde_pharmacieRep.save(c);
     }
 
-
-    public Garde_Pharmacie findByDateDebut(Date DateD, int idF, int idG){
+    public int findByNom(String nom){
+      Pharmacie ph =  pharmacieRep.findByNom(nom);
+      return  ph.getId();
+    }
+    public int findByType(String nom){
+        Garde gr =  gardeRep.findByType(nom);
+        return gr.getId();
+    }
+    public Garde_Pharmacie findByDateDebut(Date DateD, String idF, String idG){
         return this.findAll().stream().filter(gardePharmacie ->
                         gardePharmacie.getPg().getDateDebut().equals(DateD) &&
-                                gardePharmacie.getPg().getPharmacie() == idF &&
-                                gardePharmacie.getPg().getGarde() == idG )
+                                gardePharmacie.getPg().getPharmacie() == this.findByNom(idF) &&
+                                gardePharmacie.getPg().getGarde() == this.findByType(idG) )
                 .findFirst().orElse(null);
     }
 
-    public Garde_Pharmacie updateGarde_Pharmacie(Date date ,int idF , int idG , Garde_Pharmacie gardePharmacieup) {
+    public Garde_Pharmacie updateGarde_Pharmacie(Date date ,String idF , String idG , Garde_Pharmacie gardePharmacieup) {
         Garde_Pharmacie gp = this.findByDateDebut(date, idF ,idG);
-        if(gp != null){
+        if(gp != null) {
             garde_pharmacieRep.delete(gp);
+
+            gp.setPg(gardePharmacieup.getPg());
+            gp.setDateFin(gardePharmacieup.getDateFin());
+            return garde_pharmacieRep.save(gp);
         }
-        gp.setPg(gardePharmacieup.getPg());
-        gp.setDateFin(gardePharmacieup.getDateFin());
-        return garde_pharmacieRep.save(gp);
+        return  null;
     }
 
+    public void deleteGp(Date date, String idF, String idG){
+        Garde_Pharmacie gp = this.findByDateDebut(date, idF ,idG);
+        garde_pharmacieRep.delete(gp);
+    }
 
 }

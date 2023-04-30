@@ -11,6 +11,8 @@ import java.util.List;
 public interface PharmacieRep extends JpaRepository<Pharmacie, Integer> {
         Pharmacie findById(int id);
 
+        Pharmacie findByNom(String nom);
+
         @Query("SELECT p FROM Pharmacie p JOIN p.zone z JOIN z.ville v WHERE v.nom =?1 AND z.nom =?2")
         List<Pharmacie> findAllByVilleAndZone(String ville,String zone);
 

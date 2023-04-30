@@ -36,6 +36,11 @@ public class Garde_PharmacieController {
         Garde_Pharmacie p=gardePharmacieService.findById(id);
         gardePharmacieService.delete(p);
     }
+    @DeleteMapping("/deleteGP/{dateD}/{idF}/{idG}")
+    public void deleteGP(@PathVariable("dateD") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateD,
+                         @PathVariable("idF") String idF,@PathVariable("idG") String idG){
+       gardePharmacieService.deleteGp(dateD,idF,idG);
+    }
 
     @PutMapping("/update")
     public void update(@RequestBody Garde_Pharmacie p){
@@ -44,7 +49,7 @@ public class Garde_PharmacieController {
 
     @PutMapping("/update/{dateD}/{idF}/{idG}")
     public void updateCity(@PathVariable("dateD") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateD,
-                           @PathVariable("idF") int idF,@PathVariable("idG") int idG,
+                           @PathVariable("idF") String idF,@PathVariable("idG") String idG,
                            @RequestBody Garde_Pharmacie gp) {
             gardePharmacieService.updateGarde_Pharmacie(dateD, idF ,idG, gp);
     }
