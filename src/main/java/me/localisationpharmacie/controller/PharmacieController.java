@@ -3,18 +3,17 @@ package me.localisationpharmacie.controller;
 
 
 import me.localisationpharmacie.entity.Pharmacie;
-import me.localisationpharmacie.repository.Garde_PharmacieRep;
 import me.localisationpharmacie.service.PharmacieService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/pharmacies")
-@CrossOrigin("*")
+@RequestMapping("api/controller/pharmacies")
+@CrossOrigin(value = "http://localhost:3000",
+        methods = {RequestMethod.GET, RequestMethod.POST,
+                RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS})
 public class PharmacieController {
 
     @Autowired

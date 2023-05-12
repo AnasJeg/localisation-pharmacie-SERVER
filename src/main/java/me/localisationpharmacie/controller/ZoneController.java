@@ -5,12 +5,13 @@ import me.localisationpharmacie.entity.Ville;
 import me.localisationpharmacie.entity.Zone;
 import me.localisationpharmacie.service.ZoneService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("api/zones")
+@RequestMapping("api/controller/zones")
 @CrossOrigin
 public class ZoneController {
 
@@ -23,6 +24,7 @@ public class ZoneController {
     }
 
     @PostMapping("/save")
+    @PreAuthorize("hasAuthority('admin:create')")
     public void save(@RequestBody Zone zone){
         zoneService.save(zone);
     }

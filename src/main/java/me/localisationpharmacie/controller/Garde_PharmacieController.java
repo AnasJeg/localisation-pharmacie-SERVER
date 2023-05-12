@@ -15,7 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/GardePharmacie")
+@RequestMapping("api/controller/GardePharmacie")
 @CrossOrigin
 public class Garde_PharmacieController {
     @Autowired
