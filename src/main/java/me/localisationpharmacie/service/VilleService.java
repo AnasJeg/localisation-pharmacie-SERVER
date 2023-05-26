@@ -39,4 +39,8 @@ public class VilleService implements Dao<Ville> {
             villeRep.save(c);
     }
 
+    public Ville findByNom(String nom) {
+        return villeRep.findByNom(nom);
+    }
+
 }

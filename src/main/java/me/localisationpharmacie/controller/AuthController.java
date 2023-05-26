@@ -33,5 +33,4 @@ public class AuthController {
         service.refreshToken(request, response);
     }
 
-
 }

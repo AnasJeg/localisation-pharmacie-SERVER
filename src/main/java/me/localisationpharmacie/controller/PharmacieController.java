@@ -2,6 +2,7 @@ package me.localisationpharmacie.controller;
 
 
 
+import jakarta.websocket.server.PathParam;
 import me.localisationpharmacie.entity.Pharmacie;
 import me.localisationpharmacie.service.PharmacieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,10 @@ public class PharmacieController {
         return pharmacieService.findAll();
     }
 
+    @GetMapping("/find/{id}")
+    public Pharmacie findByid(@PathVariable int id){
+        return pharmacieService.findById(id);
+    }
     @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable int id){
         Pharmacie p=pharmacieService.findById(id);
@@ -41,6 +46,10 @@ public class PharmacieController {
         pharmacieService.update(p);
     }
 
+    @GetMapping("/ville")
+    public List<Pharmacie> findByVille(@PathParam(value = "nom") String nom){
+        return pharmacieService.findByVille(nom);
+    }
 
     @GetMapping("/ville/{ville}/zone/{zone}")
     public List<Pharmacie> getPharmacieByVZ(@PathVariable String ville,@PathVariable String zone){

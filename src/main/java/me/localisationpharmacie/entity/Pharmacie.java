@@ -1,7 +1,6 @@
 package me.localisationpharmacie.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,8 +21,10 @@ public class Pharmacie {
     private double latitude;
     private double longitude;
 
+    @Column(length = 600000)
     private String photos;
 
+    private float rating;
     @ManyToOne(fetch = FetchType.EAGER)
     private Zone zone;
 
@@ -31,8 +32,4 @@ public class Pharmacie {
     @JsonIgnore
     private Collection<Garde_Pharmacie> pharmacieGardes;
 
-    @OneToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name = "user")
-    @JsonIgnore
-    private User user;
 }

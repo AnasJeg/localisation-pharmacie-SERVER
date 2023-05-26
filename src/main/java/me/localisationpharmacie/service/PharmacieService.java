@@ -41,24 +41,27 @@ public class PharmacieService implements Dao<Pharmacie> {
         pharmacieRep.save(c);
     }
 
+    public List<Pharmacie> findByVille(String ville){
+        return pharmacieRep.findByVille(ville);
+    }
     public List<Pharmacie> findAllByVilleAndZone(String ville, String zone) {
         return pharmacieRep.findAllByVilleAndZone(ville, zone);
     }
 
     public List<Pharmacie> findAllPharmacies(String ville, String zone, String periode) {
-        return pharmacieRep.findAllPh(ville, zone, periode);
+        return pharmacieRep.findByZoneAndPharmacieGardes(ville, zone, periode);
     }
 
 
     public String getItineraire(int id, String depart) throws Exception {
-        String apikey="AIzaSyDzmu1dHaje4yWHlQkP4cGC6lwWBRuwaUA";
+        String apikey = "AIzaSyDzmu1dHaje4yWHlQkP4cGC6lwWBRuwaUA";
         Optional<Pharmacie> optionalPharmacie = Optional.ofNullable(pharmacieRep.findById(id));
         Pharmacie pharmacie = optionalPharmacie.orElseThrow(() -> new Exception("Pharmacie not found !!!"));
         String destination = pharmacie.getLatitude() + "," + pharmacie.getLongitude();
-        String url = "https://maps.googleapis.com/maps/api/directions/json?origin=" + depart + "&destination=" + destination + "&key="+apikey;
+        String url = "https://maps.googleapis.com/maps/api/directions/json?origin=" + depart + "&destination=" + destination + "&key=" + apikey;
         RestTemplate restTemplate = new RestTemplate();
-        String response = restTemplate.getForObject(url, String.class);
-        return response;
+        return restTemplate.getForObject(url, String.class);
     }
+
 
 }

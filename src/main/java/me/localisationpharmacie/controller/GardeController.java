@@ -26,7 +26,6 @@ public class GardeController {
         gardeService.save(garde);
     }
 
-
     @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable int id){
         Garde g=gardeService.findById(id);

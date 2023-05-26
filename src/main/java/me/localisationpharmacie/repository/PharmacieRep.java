@@ -13,10 +13,12 @@ public interface PharmacieRep extends JpaRepository<Pharmacie, Integer> {
 
         Pharmacie findByNom(String nom);
 
+        @Query("SELECT p from Pharmacie p JOIN p.zone z JOIN z.ville v WHERE v.nom=?1")
+        List<Pharmacie> findByVille(String ville);
         @Query("SELECT p FROM Pharmacie p JOIN p.zone z JOIN z.ville v WHERE v.nom =?1 AND z.nom =?2")
         List<Pharmacie> findAllByVilleAndZone(String ville,String zone);
 
         @Query("SELECT p FROM Pharmacie p JOIN p.zone z JOIN z.ville v JOIN p.pharmacieGardes pg WHERE v.nom = :ville AND z.nom = :zone AND pg.garde.type = :period ")
-        List<Pharmacie> findAllPh(@Param("ville") String ville, @Param("zone") String zone, @Param("period") String period);
+        List<Pharmacie> findByZoneAndPharmacieGardes(@Param("ville") String ville, @Param("zone") String zone, @Param("period") String period);
 
 }

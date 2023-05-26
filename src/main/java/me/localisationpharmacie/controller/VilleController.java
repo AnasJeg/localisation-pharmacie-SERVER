@@ -1,6 +1,7 @@
 package me.localisationpharmacie.controller;
 
 
+import jakarta.websocket.server.PathParam;
 import me.localisationpharmacie.entity.Ville;
 import me.localisationpharmacie.service.VilleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +50,9 @@ public class VilleController {
         villeService.delete(v);
     }
 
+    @GetMapping
+    public Ville findByNom(@PathParam(value = "nom") String nom) {
+        return villeService.findByNom(nom);
+    }
 
 }

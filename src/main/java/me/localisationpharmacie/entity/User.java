@@ -21,11 +21,11 @@ public class User implements UserDetails {
     private int id;
     private String prenom;
     private String nom;
+
+    @Column(nullable = false,unique = true)
     private String email;
     private String password;
 
-    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
-    private Pharmacie pharmacie;
 
     @Enumerated(EnumType.STRING)
     private Role role;
